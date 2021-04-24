@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
+    public float force = 5f;
     public float speed = 5f;
     public Rigidbody rb;
     public bool grounded = true;
@@ -23,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetButtonDown("Jump") && grounded)
         {
-            rb.AddForce(new Vector3(0,5,0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0,force,0), ForceMode.Impulse);
             grounded = false;
         }
     }
