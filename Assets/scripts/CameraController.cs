@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     {
         Vector3 vector = new Vector3(0, 3f, -5f);
         float velocity = rb.velocity.sqrMagnitude;
-        vector = vector * (1f + velocity/25f);
+        vector = vector * (1f - velocity/250f);
 
         Vector3 newPosition = sphere.position + vector;
 
