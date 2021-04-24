@@ -4,34 +4,57 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float force = 5f;
     public float speed = 5f;
     public Rigidbody rb;
     public bool grounded = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal")*Time.deltaTime*speed;
-        float vertical = Input.GetAxis("Vertical")*Time.deltaTime*speed;
-        
-        transform.Translate(horizontal,0,vertical);
-
         if(Input.GetButtonDown("Jump") && grounded)
         {
             rb.AddForce(new Vector3(0,force,0), ForceMode.Impulse);
             grounded = false;
         }
+
+        handlePlayerMovement();
     }
 
     private void OnCollisionEnter(Collision collision){
         if(collision.gameObject.tag == "Ground")
             grounded = true;
+    }
+
+    private void handlePlayerMovement()
+    {
+        Vector3 direction = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            direction = Vector3.right;
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            direction = Vector3.left;
+        }
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            direction = -Vector3.forward;
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            direction = Vector3.forward;
+        }
+
+        rb.AddTorque(direction*20f);
     }
 
 }
