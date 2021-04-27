@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float force = 5f;
     public float speed = 5f;
+    public float torque = 10f;
     public Rigidbody rb;
     public bool grounded = true;
 
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
             direction = Vector3.forward;
         }
 
-        rb.AddTorque(direction*20f);
+        rb.AddTorque(direction*torque);
     }
 
 }
